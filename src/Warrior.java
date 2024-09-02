@@ -18,12 +18,13 @@ public class Warrior extends Character {
         return amount;
     }
 
-    public void dealDamage(int amount) {
+    public int dealDamage(int amount) {
         int newAmount = amount;
         if (armor != null) {
             newAmount = armor.adjustDefense(amount);
         }
         hp -= newAmount;
+        return newAmount;
     }
 
     public ArrayList<Move> getMoves() {

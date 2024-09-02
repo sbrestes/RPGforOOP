@@ -9,7 +9,7 @@ public class AttackCommand extends Command{
     }
 
     public void perform(Scene scene) {
-        scene.displayMessage(damage + " damage to " + defender.getName());
-        defender.dealDamage(damage);
+        int actualDealtDamage = defender.dealDamage(damage);
+        scene.displayMessage(actualDealtDamage + " damage to " + defender.getName());
     }
 }

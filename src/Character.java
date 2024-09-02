@@ -25,7 +25,7 @@ public abstract class Character {
 
     public abstract int getAttackPower();
 
-    public abstract void dealDamage(int amount);
+    public abstract int dealDamage(int amount);
 
     public abstract ArrayList<Move> getMoves();
 }
