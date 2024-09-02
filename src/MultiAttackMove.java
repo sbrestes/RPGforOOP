@@ -12,6 +12,7 @@ public class MultiAttackMove extends Move{
         return "Multi Attack";
     }
 
+    @Override
     public ArrayList<Command> use(Character user, Character receiver) {
         int num = (int)(Math.random() * maxHits + 1);
         ArrayList<Command> commands = new ArrayList<Command>();
