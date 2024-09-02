@@ -69,6 +69,7 @@ public class Scene {
             }
         }
 
+        System.out.println("Game over. Total damage dealt: " + Global.getInstance().getTotalDamage());
 
         scanner.close();
     }

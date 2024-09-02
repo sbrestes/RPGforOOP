@@ -11,5 +11,6 @@ public class AttackCommand extends Command{
     public void perform(Scene scene) {
         int actualDealtDamage = defender.dealDamage(damage);
         scene.displayMessage(actualDealtDamage + " damage to " + defender.getName());
+        Global.getInstance().reportDamage(actualDealtDamage);
     }
 }
