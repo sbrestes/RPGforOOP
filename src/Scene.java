@@ -61,7 +61,7 @@ public class Scene {
 
             ArrayList<Move> opponentOptions = theScene.getOpponent().getMoves();
             int opponentChoice = (int)(Math.random() * opponentOptions.size());
-            theScene.commandQueue.addAll(options.get(choice-1).use(theScene.opponent, theScene.player));
+            theScene.commandQueue.addAll(options.get(opponentChoice).use(theScene.opponent, theScene.player));
 
             while (!theScene.commandQueue.isEmpty() && !theScene.gameOver) {
                 theScene.commandQueue.get(0).perform(theScene);
