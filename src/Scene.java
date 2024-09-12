@@ -56,18 +56,22 @@ public class Scene {
     }
 
     public void displayStats() {
-        System.out.println(player.getName() + " HP: " + player.getHP() + "/" + player.getMaxHP());
-        System.out.println(opponent.getName() + " HP: " + opponent.getHP() + "/" + opponent.getMaxHP());
+        System.out.println(player.getName() + " HP: " + player.getHp() + "/" + player.getMaxHP());
+        System.out.println(opponent.getName() + " HP: " + opponent.getHp() + "/" + opponent.getMaxHP());
     }
 
     public void checkForGameOver() {
-        if (player.getHP() <= 0) {
+        if (player.getHp() <= 0) {
             System.out.println(opponent.getName() + " wins!");
             gameOver = true;
-        } else if (opponent.getHP() <= 0) {
+        } else if (opponent.getHp() <= 0) {
             System.out.println(player.getName() + " wins!");
             gameOver = true;
         }
+    }
+
+    public void addCommands(ArrayList<Command> commands) {
+        commandQueue.addAll(commands);
     }
 
     public static void main(String[] args) {
