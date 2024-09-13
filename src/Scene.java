@@ -8,9 +8,16 @@ public class Scene {
     private ArrayList<Command> commandQueue = new ArrayList<Command>();
     Scanner scanner;
 
+    public Scene() {
+        this.player = null;
+        this.opponent = null;
+        scanner = new Scanner(System.in);
+    }
+
     public Scene(Character player, Character opponent) {
         this.player = player;
         this.opponent = opponent;
+        scanner = new Scanner(System.in);
     }
 
     public Character getPlayer() {
@@ -19,6 +26,14 @@ public class Scene {
 
     public Character getOpponent() {
         return opponent;
+    }
+
+    public void setPlayer(Character player) {
+        this.player = player;
+    }
+
+    public void setOpponent(Character opponent) {
+        this.opponent = opponent;
     }
 
     public void displayMessage(String output) {
@@ -76,11 +91,16 @@ public class Scene {
 
     public static void main(String[] args) {
 
-        Scene theScene = new Scene(
-                new Warrior("The Player", 10, new Sword(), new BronzePlate()),
-                new Warrior("The Other Guy", 10, null, new Shirt())
-        );
-        theScene.scanner = new Scanner(System.in);
+        Scene theScene = new Scene();
+
+        CharacterFactory charFact = new CharacterFactory();
+
+        theScene.displayMessage("Which character would you like to play as?");
+        theScene.setPlayer(charFact.build(theScene, "The Player"));
+
+        theScene.displayMessage("Which character would you like to play against?");
+        theScene.setOpponent(charFact.build(theScene, "The Other Guy"));
+
 
         theScene.displayStats();
         while (!theScene.gameOver) {
