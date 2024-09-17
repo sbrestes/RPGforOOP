@@ -31,6 +31,7 @@ public class Warrior extends Character {
         ArrayList<Move> moves = new ArrayList<Move>();
         moves.add(new NormalAttackMove());
         moves.add(new MultiAttackMove(3));
+        moves.add(new SurrenderMove());
         return moves;
     }
 }
