@@ -60,6 +60,7 @@ public class Scene {
                 ret = scanner.nextInt();
                 if (ret >= minInclusive && ret < maxExclusive) {
                     done = true;
+                    scanner.nextLine();
                 } else {
                     displayMessage(ret + " is outside the range " + minInclusive + " <= x < " + maxExclusive);
                 }
@@ -96,27 +97,18 @@ public class Scene {
         CharacterFactory charFact = new CharacterFactory();
 
         theScene.displayMessage("Which character would you like to play as?");
-        theScene.setPlayer(charFact.build(theScene, "The Player"));
+        theScene.setPlayer(charFact.build(theScene, "The Player", new PlayerBehavior()));
 
         theScene.displayMessage("Which character would you like to play against?");
-        theScene.setOpponent(charFact.build(theScene, "The Other Guy"));
+        theScene.setOpponent(charFact.build(theScene, "The Other Guy", new ComputerBehavior()));
 
 
         theScene.displayStats();
         while (!theScene.gameOver) {
-            theScene.displayMessage("What will you do?");
-            ArrayList<Move> options = theScene.getPlayer().getMoves();
-            for (int i = 0; i < options.size(); i++) {
-                System.out.println((i+1) + ": " + options.get(i).getTitle());
-            }
-            int choice = theScene.getIntInput(1, options.size() + 1) - 1;
-            theScene.scanner.nextLine();
 
-            theScene.commandQueue.addAll(options.get(choice).use(theScene.player, theScene.opponent));
+            theScene.commandQueue.addAll(theScene.getPlayer().takeTurn(theScene).use(theScene.player, theScene.opponent));
 
-            ArrayList<Move> opponentOptions = theScene.getOpponent().getMoves();
-            int opponentChoice = (int)(Math.random() * opponentOptions.size());
-            theScene.commandQueue.addAll(opponentOptions.get(opponentChoice).use(theScene.opponent, theScene.player));
+            theScene.commandQueue.addAll(theScene.getOpponent().takeTurn(theScene).use(theScene.opponent, theScene.player));
 
             while (!theScene.commandQueue.isEmpty() && !theScene.gameOver) {
                 theScene.commandQueue.get(0).perform(theScene);
