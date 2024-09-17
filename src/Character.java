@@ -47,6 +47,14 @@ public abstract class Character {
         this.hp = hp;
     }
 
+    public int getMp() {
+        return mp;
+    }
+
+    public void setMp(int mp) {
+        this.hp = mp;
+    }
+
     public abstract int getAttackPower();
 
     public abstract int dealDamage(int amount);
