@@ -58,7 +58,7 @@ public abstract class Character {
     }
 
     public void setMp(int mp) {
-        this.hp = mp;
+        this.mp = mp;
     }
 
     public Move takeTurn(Scene scene){
