@@ -32,6 +32,7 @@ public class Warrior extends Character {
         moves.add(new NormalAttackMove());
         moves.add(new MultiAttackMove(3));
         moves.add(new SurrenderMove());
+        moves.add(new HelloWorldMove());
         return moves;
     }
 }
