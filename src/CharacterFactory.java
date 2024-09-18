@@ -13,16 +13,22 @@ public class CharacterFactory {
         this.defaultMp = defaultMp;
     }
 
-    public Character build(Scene scene, String name) {
+    public Character build(Scene scene, String name, Behavior behavior) {
         scene.displayMessage("1. Warrior");
         scene.displayMessage("2. Mage");
-        int choice = scene.getIntInput(1, 3);
+        scene.displayMessage("3. Cleric");
+        int choice = scene.getIntInput(1, 4);
         Character c;
         if (choice == 1) {
             c = new Warrior(name, defaultHp, new Sword(), new BronzePlate());
-        } else {
+        } else if (choice == 2) {
             c = new Mage(name, 2, new Staff(), new LeatherArmor());
+        } else {
+            c = new Cleric(name, defaultHp, new Mace(), new BronzePlate());
         }
+
+        c.setBehavior(behavior);
+
         return c;
     }
 }

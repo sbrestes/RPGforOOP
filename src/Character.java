@@ -7,6 +7,8 @@ public abstract class Character {
     public int maxMP;
     public int mp;
 
+    Behavior behavior;
+
     public Character(String name, int maxHP) {
         this.name = name;
         this.maxHP = maxHP;
@@ -21,6 +23,10 @@ public abstract class Character {
         this.hp = maxHP;
         this.maxMP = maxMP;
         this.mp = maxMP;
+    }
+
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
     }
 
     public String getName() {
@@ -45,6 +51,18 @@ public abstract class Character {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    public void setMp(int mp) {
+        this.hp = mp;
+    }
+
+    public Move takeTurn(Scene scene){
+        return behavior.takeTurn(scene, this);
     }
 
     public abstract int getAttackPower();
