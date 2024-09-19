@@ -9,8 +9,7 @@ public class FinalBoss extends Character {
         super(name, maxHP);
         this.weapon = new EldritchScythe();
         this.armor = new ChronoRing();
-        this.maxMP = 1;
-        this.mp = 0;
+        setMaxMP(0);
         monologue = new String[]{"So you thought you could stop me? How precious.",
                 "You fought valiantly, I’ll give you that.",
                 "But here we stand, and I am the one who emerges unscathed, the one with the final laugh.",
@@ -56,9 +55,9 @@ public class FinalBoss extends Character {
     public int dealDamage(int amount) {
         int newAmount = amount;
         if (armor != null) {
-            newAmount = armor.adjustDefense(amount, maxHP);
+            newAmount = armor.adjustDefense(amount, getMaxHP());
         }
-        hp -= newAmount;
+        setHp(getHp() - newAmount);
         return newAmount;
     }
 

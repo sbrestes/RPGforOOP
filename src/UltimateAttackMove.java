@@ -17,7 +17,7 @@ public class UltimateAttackMove extends Move {
         if(user.getMp() < 1) {
             commands.add(new MessageCommand(user.getName() + " is charging up"));
             commands.add(new DeferMoveCommand(new UltimateAttackMove(monologue), user, receiver));
-            user.setMp(user.mp + 1);
+            user.setMp(user.getMp() + 1);
         } else {
             for (String line : monologue) {
                 commands.add(new MessageCommand(line));
