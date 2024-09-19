@@ -37,6 +37,7 @@ public class Warrior extends Character {
         moves.add(new PoisonMove());
         moves.add(new ShieldMove());
         moves.add(new LightningStrikeMove());
+        moves.add(new HelloWorldMove());
         return moves;
     }
 }
