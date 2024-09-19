@@ -76,6 +76,13 @@ public class Scene {
         System.out.println(opponent.getName() + " HP: " + opponent.getHp() + "/" + opponent.getMaxHP());
     }
 
+    public void displayStrength() {
+        System.out.println(player.getName() + " Strength: " + player.getMp());
+        System.out.println(opponent.getName() + " Strength: " + opponent.getMp());
+
+
+    }
+
     public void checkForGameOver() {
         if (player.getHp() <= 0) {
             System.out.println(opponent.getName() + " wins!");
@@ -109,6 +116,10 @@ public class Scene {
             theScene.commandQueue.addAll(theScene.getPlayer().takeTurn(theScene).use(theScene.player, theScene.opponent));
 
             theScene.commandQueue.addAll(theScene.getOpponent().takeTurn(theScene).use(theScene.opponent, theScene.player));
+
+            theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getPlayer()));
+            theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getOpponent()));
+            theScene.commandQueue.add(new CheckAndDisplayStatsCommand());
 
             while (!theScene.commandQueue.isEmpty() && !theScene.gameOver) {
                 theScene.commandQueue.get(0).perform(theScene);

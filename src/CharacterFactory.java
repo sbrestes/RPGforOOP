@@ -4,7 +4,7 @@ public class CharacterFactory {
     final public int defaultMp;
 
     public CharacterFactory() {
-        defaultHp = 30;
+        defaultHp = 100;
         defaultMp = 15;
     }
 
@@ -17,7 +17,8 @@ public class CharacterFactory {
         scene.displayMessage("1. Warrior");
         scene.displayMessage("2. Mage");
         scene.displayMessage("3. Cleric");
-        scene.displayMessage("4. Final Boss");
+        scene.displayMessage("4. Strength Trainer");
+        scene.displayMessage("5. Final Boss");
         int choice = scene.getIntInput(1, 5);
         Character c;
         if (choice == 1) {
@@ -26,6 +27,8 @@ public class CharacterFactory {
             c = new Mage(name, 2, new Staff(), new LeatherArmor());
         } else if (choice == 3){
             c = new Cleric(name, defaultHp, new Mace(), new BronzePlate());
+        } else if (choice == 4){
+            c = new StrengthTrainer(name, defaultHp, new BronzePlate());
         } else {
             c = new FinalBoss(name, defaultHp);
         }

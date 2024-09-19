@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 public abstract class Character {
-    public String name;
-    public int maxHP;
-    public int hp;
-    public int maxMP;
-    public int mp;
+    private String name;
+    private int maxHP;
+    private int hp;
+    private int maxMP;
+    private int mp;
 
-    Behavior behavior;
+    private Behavior behavior;
+
+    private boolean isFrozen = false; // Track if character is frozen
+    private ArrayList<StatusEffect> statusEffects = new ArrayList<>(); // Active status effects
 
     public Character(String name, int maxHP) {
         this.name = name;
@@ -53,6 +56,14 @@ public abstract class Character {
         this.hp = hp;
     }
 
+    public int getMaxMP() {
+        return maxMP;
+    }
+
+    public void setMaxMP(int maxMP) {
+        this.maxMP = maxMP;
+    }
+
     public int getMp() {
         return mp;
     }
@@ -65,9 +76,46 @@ public abstract class Character {
         return behavior.takeTurn(scene, this);
     }
 
+    // Methods for freezing
+    public boolean isFrozen() {
+        return isFrozen;
+    }
+
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
+    }
+
+    // Method to apply a status effect (like Poison, Shield)
+    public void applyStatusEffect(StatusEffect effect) {
+        statusEffects.add(effect);
+    }
+
+    // Process and apply all active status effects
+    public void processStatusEffects() {
+        ArrayList<StatusEffect> toRemove = new ArrayList<>();
+        for (StatusEffect effect : statusEffects) {
+            effect.applyEffect(this);
+            // Remove the effect if it has expired
+            if (effect instanceof PoisonEffect && ((PoisonEffect) effect).getTurnsRemaining() <= 0) {
+                toRemove.add(effect);
+            }
+            if (effect instanceof ShieldEffect && ((ShieldEffect) effect).getTurnsRemaining() <= 0) {
+                toRemove.add(effect);
+            }
+        }
+        statusEffects.removeAll(toRemove); // Remove expired effects
+    }
+
+    // Heal this character
+    public void heal(int amount) {
+        this.hp += amount;
+        if (this.hp > maxHP) this.hp = maxHP; // Cap healing at max HP
+    }
+
     public abstract int getAttackPower();
 
     public abstract int dealDamage(int amount);
 
+    // Get the list of available moves (must be implemented by subclasses)
     public abstract ArrayList<Move> getMoves();
 }
