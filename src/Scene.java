@@ -117,6 +117,10 @@ public class Scene {
 
             theScene.commandQueue.addAll(theScene.getOpponent().takeTurn(theScene).use(theScene.opponent, theScene.player));
 
+            theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getPlayer()));
+            theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getOpponent()));
+            theScene.commandQueue.add(new CheckAndDisplayStatsCommand());
+
             while (!theScene.commandQueue.isEmpty() && !theScene.gameOver) {
                 theScene.commandQueue.get(0).perform(theScene);
                 theScene.commandQueue.remove(0);

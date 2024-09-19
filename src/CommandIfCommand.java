@@ -1,22 +1,24 @@
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-public class DeferCommandIfCommand extends Command {
+public class CommandIfCommand extends Command {
 
     private Command cmd;
     private Callable<Boolean> callable;
 
-    public DeferCommandIfCommand(Command cmd, Callable<Boolean> callable) {
+    public CommandIfCommand(Command cmd, Callable<Boolean> callable) {
         this.cmd = cmd;
         this.callable = callable;
+    }
+
+    public void setCmd(Command cmd) {
+        this.cmd = cmd;
     }
 
     public void perform(Scene scene) {
         try {
             if (callable.call()) {
-                ArrayList<Command> cmds = new ArrayList<>();
-                cmds.add(cmd);
-                scene.addCommands(cmds);
+                cmd.perform(scene);
             }
         } catch (Exception ignored) { }
     }

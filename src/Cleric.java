@@ -1,4 +1,3 @@
-import javax.crypto.Mac;
 import java.util.ArrayList;
 
 public class Cleric extends Character {
@@ -24,7 +23,7 @@ public class Cleric extends Character {
         if (armor != null) {
             newAmount = armor.adjustDefense(amount);
         }
-        hp -= newAmount;
+        setHp(getHp() - newAmount);
         return newAmount;
     }
 

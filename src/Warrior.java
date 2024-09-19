@@ -23,7 +23,7 @@ public class Warrior extends Character {
         if (armor != null) {
             newAmount = armor.adjustDefense(amount);
         }
-        hp -= newAmount;
+        setHp(getHp() - newAmount);
         return newAmount;
     }
 
@@ -32,6 +32,12 @@ public class Warrior extends Character {
         moves.add(new NormalAttackMove());
         moves.add(new MultiAttackMove(3));
         moves.add(new SurrenderMove());
+        moves.add(new FreezeMove());
+        moves.add(new HealMove());
+        moves.add(new PoisonMove());
+        moves.add(new ShieldMove());
+        moves.add(new LightningStrikeMove());
+        moves.add(new HelloWorldMove());
         return moves;
     }
 }
