@@ -76,6 +76,13 @@ public class Scene {
         System.out.println(opponent.getName() + " HP: " + opponent.getHp() + "/" + opponent.getMaxHP());
     }
 
+    public void displayStrength() {
+        System.out.println(player.getName() + " Strength: " + player.getMp());
+        System.out.println(opponent.getName() + " Strength: " + opponent.getMp());
+
+
+    }
+
     public void checkForGameOver() {
         if (player.getHp() <= 0) {
             System.out.println(opponent.getName() + " wins!");

@@ -17,14 +17,17 @@ public class CharacterFactory {
         scene.displayMessage("1. Warrior");
         scene.displayMessage("2. Mage");
         scene.displayMessage("3. Cleric");
-        int choice = scene.getIntInput(1, 4);
+        scene.displayMessage("4. Strength Trainer");
+        int choice = scene.getIntInput(1, 5);
         Character c;
         if (choice == 1) {
             c = new Warrior(name, defaultHp, new Sword(), new BronzePlate());
         } else if (choice == 2) {
             c = new Mage(name, 2, new Staff(), new LeatherArmor());
-        } else {
+        } else if (choice == 3){
             c = new Cleric(name, defaultHp, new Mace(), new BronzePlate());
+        } else {
+            c = new StrengthTrainer(name, defaultHp, new BronzePlate());
         }
 
         c.setBehavior(behavior);
