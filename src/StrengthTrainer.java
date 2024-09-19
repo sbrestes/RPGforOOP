@@ -4,11 +4,10 @@ public class StrengthTrainer extends Character {
     public Equipment armor;
     public StrengthTrainer(String name, int maxHP, Equipment armor) {
         super(name, maxHP);
-        this.mp = 0;
         this.armor = armor;
     }
     public int getAttackPower() {
-        return (2 + mp);
+        return (2 + getMp());
     }
 
     public int dealDamage(int amount) {
@@ -16,7 +15,7 @@ public class StrengthTrainer extends Character {
         if (armor != null) {
             newAmount = armor.adjustDefense(amount);
         }
-        hp -= newAmount;
+        setHp(getHp()-newAmount);
         return newAmount;
     }
 
