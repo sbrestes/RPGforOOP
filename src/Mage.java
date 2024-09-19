@@ -23,7 +23,7 @@ public class Mage extends Character {
         if (armor != null) {
             newAmount = armor.adjustDefense(amount);
         }
-        hp -= newAmount;
+        setHp(getHp() - newAmount);
         return newAmount;
     }
 
