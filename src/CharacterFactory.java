@@ -19,7 +19,7 @@ public class CharacterFactory {
         scene.displayMessage("3. Cleric");
         scene.displayMessage("4. Strength Trainer");
         scene.displayMessage("5. Final Boss");
-        int choice = scene.getIntInput(1, 5);
+        int choice = scene.getIntInput(1, 6);
         Character c;
         if (choice == 1) {
             c = new Warrior(name, defaultHp, new Sword(), new BronzePlate());
