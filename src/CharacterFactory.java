@@ -4,7 +4,7 @@ public class CharacterFactory {
     final public int defaultMp;
 
     public CharacterFactory() {
-        defaultHp = 30;
+        defaultHp = 100;
         defaultMp = 15;
     }
 
