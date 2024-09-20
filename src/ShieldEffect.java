@@ -6,9 +6,9 @@ public class ShieldEffect implements StatusEffect {
     }
 
     @Override
-    public void applyEffect(Character character) {
+    public void applyEffect(Scene scene, Character character) {
         if (turnsRemaining > 0) {
-            System.out.println(character.getName() + " is shielded! Incoming damage will be reduced.");
+            scene.displayMessage(character.getName() + " is shielded! Incoming damage will be reduced.");
             turnsRemaining--; // Reduces the shield duration
         }
     }

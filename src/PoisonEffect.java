@@ -6,11 +6,11 @@ public class PoisonEffect implements StatusEffect {
     }
 
     @Override
-    public void applyEffect(Character character) {
+    public void applyEffect(Scene scene, Character character) {
         if (turnsRemaining > 0) {
             int poisonDamage = 5; // Damage per turn, can be adjusted
             character.dealDamage(poisonDamage);  // Apply poison damage
-            System.out.println(character.getName() + " takes " + poisonDamage + " poison damage! (" + turnsRemaining + " turns remaining)");
+            scene.displayMessage(character.getName() + " takes " + poisonDamage + " poison damage! (" + turnsRemaining + " turns remaining)");
             turnsRemaining--;
         }
     }

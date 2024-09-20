@@ -1,28 +1,27 @@
 import java.util.ArrayList;
 
 public class StrengthTrainer extends Character {
-    public Equipment armor;
-    public StrengthTrainer(String name, int maxHP, Equipment armor) {
-        super(name, maxHP);
-        this.armor = armor;
+    public StrengthTrainer(Behavior behavior, String name, int maxHP) {
+        super(behavior, name, maxHP);
+        setMaxMP(20);
     }
     public int getAttackPower() {
         return (2 + getMp());
     }
 
-    public int dealDamage(int amount) {
-        int newAmount = amount;
-        if (armor != null) {
-            newAmount = armor.adjustDefense(amount);
+    public String displayMP() {
+        if (getMaxMP() <= 0) {
+            return "";
         }
-        setHp(getHp()-newAmount);
-        return newAmount;
+        return "Strength : " + getMp();
     }
 
     public ArrayList<Move> getMoves() {
         ArrayList<Move> moves = new ArrayList<Move>();
         moves.add(new NormalAttackMove());
         moves.add(new TrainMove());
+        moves.add(new MultiAttackMove(getMp()));
+        moves.add(new LightningStrikeMove());
         return moves;
     }
 }

@@ -1,14 +1,10 @@
 import java.util.ArrayList;
 
 public class FinalBoss extends Character {
-    public Equipment weapon;
-    public Equipment armor;
     private final String[] monologue;
 
-    public FinalBoss(String name, int maxHP) {
-        super(name, maxHP);
-        this.weapon = new EldritchScythe();
-        this.armor = new ChronoRing();
+    public FinalBoss(Behavior behavior, String name, int maxHP) {
+        super(behavior, name, maxHP);
         setMaxMP(0);
         monologue = new String[]{"So you thought you could stop me? How precious.",
                 "You fought valiantly, I’ll give you that.",
@@ -42,23 +38,6 @@ public class FinalBoss extends Character {
                 "You are not my adversary anymore; you are my cautionary tale.",
                 "And as I reign over this world I’ve claimed, remember that your failure was my masterpiece.",
                 "Your story ends here, while mine has only just begun."};
-    }
-
-    public int getAttackPower() {
-        int amount = 2;
-        if (weapon != null) {
-            amount = weapon.adjustAttack(amount);
-        }
-        return amount;
-    }
-
-    public int dealDamage(int amount) {
-        int newAmount = amount;
-        if (armor != null) {
-            newAmount = armor.adjustDefense(amount, getMaxHP());
-        }
-        setHp(getHp() - newAmount);
-        return newAmount;
     }
 
     public ArrayList<Move> getMoves() {

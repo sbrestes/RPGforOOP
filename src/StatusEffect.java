@@ -1,3 +1,3 @@
 public interface StatusEffect {
-    void applyEffect(Character character);
+    void applyEffect(Scene scene, Character character);
 }
