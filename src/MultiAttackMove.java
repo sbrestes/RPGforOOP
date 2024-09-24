@@ -9,7 +9,7 @@ public class MultiAttackMove extends Move{
     }
 
     public String getTitle(){
-        return "Multi Attack";
+        return "Multi Attack x" + maxHits;
     }
 
     @Override
@@ -27,10 +27,10 @@ public class MultiAttackMove extends Move{
                 commands.add(new MessageCommand("CRIT!!!"));
             }
         }
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         commands.add(new MessageCommand(user.getName() + " takes 2 damage as recoil!"));
         commands.add(new AttackCommand(2, user));
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }

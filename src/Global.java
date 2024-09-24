@@ -1,6 +1,7 @@
 public class Global {
     private static Global instance = null;
 
+    private int level = 1;
     private int totalDamage;
 
     private Global() {
@@ -21,5 +22,13 @@ public class Global {
 
     public int getTotalDamage() {
         return totalDamage;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void levelUp() {
+        level++;
     }
 }

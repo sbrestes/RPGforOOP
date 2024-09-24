@@ -1,6 +1,11 @@
-public class Sword extends Equipment{
+public class Sword extends Weapon{
+    @Override
+    public String getTitle() {
+        return "Sword";
+    }
+
     @Override
     public int adjustAttack(int amount) {
-        return amount + 1;
+        return amount + 4;
     }
 }

@@ -11,7 +11,7 @@ public class HealMove extends Move{
         ArrayList<Command> commands = new ArrayList<Command>();
         commands.add(new MessageCommand(user.getName() + " Heals " + user.getName() + "!"));
         commands.add(new AttackCommand(-3*user.getAttackPower(), user));
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }

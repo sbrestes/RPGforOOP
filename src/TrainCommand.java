@@ -5,6 +5,6 @@ public class TrainCommand extends Command{
         this.trainer = trainer;
     }
     public void perform(Scene scene){
-        trainer.setMp(trainer.getMp() + 10);
+        trainer.setMp(trainer.getMp() + 2);
     }
 }

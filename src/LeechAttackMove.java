@@ -11,7 +11,7 @@ public class LeechAttackMove extends Move{
         ArrayList<Command> commands = new ArrayList<Command>();
         commands.add(new MessageCommand(user.getName() + " uses a leech attack against " + receiver.getName() + "!"));
         commands.add(new LeechCommand(user.getAttackPower(), receiver, user));
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }

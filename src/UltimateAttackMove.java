@@ -27,7 +27,7 @@ public class UltimateAttackMove extends Move {
             commands.add(new MessageCommand("bye bye"));
             commands.add(new MessageCommand(user.getName() + " uses an ultimate attack against " + receiver.getName() + "!"));
             commands.add(new AttackCommand(user.getAttackPower(), receiver));
-            commands.add(new CheckAndDisplayStatsCommand());
+            commands.add(new CheckFightOverCommand());
         }
         return commands;
     }

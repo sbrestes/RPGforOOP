@@ -24,7 +24,7 @@ public class MagicDust extends Move{
             commands.add(new MessageCommand ("just right!!"));
         }
 
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }
