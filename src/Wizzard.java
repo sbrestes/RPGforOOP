@@ -4,19 +4,8 @@ public class Wizzard extends Character {
     public Equipment weapon;
     public Equipment armor;
 
-    public Wizzard(String name, int maxHP, Equipment weapon, Equipment armor) {
-        super(name, maxHP);
-        this.weapon = weapon;
-        this.armor = armor;
-    }
-
-    public int getAttackPower() {
-        int num = (int) (Math.random() * 100);
-        int amount = 2;
-        if (weapon != null) {
-            amount = weapon.adjustAttack(amount);
-        }
-        return amount;
+    public Wizzard(Behavior behavior, String name, int maxHP) {
+        super(behavior, name, maxHP);
     }
 
     public int dealDamage(int amount) {

@@ -7,7 +7,7 @@ public class ProcessStatusEffectsCommand extends Command {
     }
 
     public void perform(Scene scene) {
-        target.processStatusEffects();
+        target.processStatusEffects(scene);
     }
 
 }

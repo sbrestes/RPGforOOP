@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Scene {
     private Character player;
     private Character opponent;
+    CharacterFactory opponentFact;
     private boolean gameOver = false;
     private ArrayList<Command> commandQueue = new ArrayList<Command>();
     Scanner scanner;
@@ -37,10 +39,29 @@ public class Scene {
     }
 
     public void displayMessage(String output) {
-        System.out.println(output);
+        displayMessage(output, true);
+    }
+
+    public void displayMessage(String output, boolean doPause) {
+        System.out.println("|    * " + String.format("%-54s", output) + "|");
+        try {
+            TimeUnit.MILLISECONDS.sleep(500);
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void displayOptions(String[] output) {
+        for (int i = 0; i < output.length; i++) {
+            System.out.println("|         " + String.format("%4s", (i+1) + ". ") + String.format("%-47s", output[i]) + "|");
+        }
+    }
+
+    public void waitForEnter() {
+        scanner.nextLine();
     }
 
     public String getStringInput(){
+        System.out.print("       > ");
         return scanner.nextLine();
     }
 
@@ -53,6 +74,7 @@ public class Scene {
     }
 
     public int getIntInput(int minInclusive, int maxExclusive) {
+        System.out.print("       > ");
         int ret = -1;
         boolean done = false;
         while(!done) {
@@ -62,27 +84,84 @@ public class Scene {
                     done = true;
                     scanner.nextLine();
                 } else {
-                    displayMessage(ret + " is outside the range " + minInclusive + " <= x < " + maxExclusive);
+                    displayMessage(ret + " is outside the range " + minInclusive + " <= x < " + maxExclusive, false);
+                    System.out.print("       > ");
                 }
             } else {
-                displayMessage(scanner.nextLine() + " is not a valid integer.");
+                displayMessage(scanner.nextLine() + " is not a valid integer.", false);
+                System.out.print("       > ");
             }
         }
         return ret;
     }
 
     public void displayStats() {
-        System.out.println(player.getName() + " HP: " + player.getHp() + "/" + player.getMaxHP());
-        System.out.println(opponent.getName() + " HP: " + opponent.getHp() + "/" + opponent.getMaxHP());
+        System.out.println("==============================================================");
+        System.out.println("|     " + String.format("%-25s", player.displayHP()) + String.format("%25s", opponent.displayHP()) + "     |");
+        System.out.println("|     " + makeProgBar(player.getHp(), player.getMaxHP(), 15, false) + "                    " + makeProgBar(opponent.getHp(), opponent.getMaxHP(), 15, true) + "     |");
+        System.out.println("|     " + String.format("%-25s", player.displayMP()) + String.format("%25s", opponent.displayMP()) + "     |");
+        System.out.println("|     " + makeProgBar(player.getMp(), player.getMaxMP(), 15, false) + "                    " + makeProgBar(opponent.getMp(), opponent.getMaxMP(), 15, true) + "     |");
+        System.out.println("|     " + String.format("%-25s", player.displayWeapon()) + String.format("%25s", opponent.displayWeapon()));
+        System.out.println("|     " + String.format("%-25s", player.displayArmor()) + String.format("%25s", opponent.displayArmor()));
+
+        System.out.println("|                                                            |");
+        System.out.println("|                         Level: " + String.format("%3s", Global.getInstance().getLevel()) + "                         |");
+        String[] pf = player.displayFigure();
+        String[] of = player.displayFigure();
+
+        for (int i = 0; i < pf.length; i++) {
+            System.out.println("|            " + pf[i] + "                      " + of[i] + "            |");
+        }
+        System.out.println("|  " + String.format("%-28s", player.getName()) + String.format("%28s", opponent.getName()) + "  |");
+
+        System.out.println("|                                                            |");
     }
 
-    public void checkForGameOver() {
+    public String makeProgBar(int num, int denom, int length, boolean flip) {
+        String ret = "";
+        if (length <= 0 || denom <= 0 || num <= 0) {
+            for (int i = 0; i < length; i++) {
+                ret += " ";
+            }
+        } else {
+            int unit = denom / length;
+            int prog = length * num / denom;
+            if (flip) {
+                for (int i = 0; i < length - prog; i++) {
+                    ret += "-";
+                }
+            }
+            for (int i = 0; i < prog; i++) {
+                ret += "█";
+            }
+            if (!flip) {
+                for (int i = 0; i < length - prog; i++) {
+                    ret += "-";
+                }
+            }
+        }
+        return ret;
+    }
+
+    public void displayStrength() {
+        displayMessage(player.getName() + " Strength: " + player.getMp());
+        displayMessage(opponent.getName() + " Strength: " + opponent.getMp());
+    }
+
+    public void checkForFightOver() {
         if (player.getHp() <= 0) {
-            System.out.println(opponent.getName() + " wins!");
+            displayMessage(opponent.getName() + " wins!");
             gameOver = true;
         } else if (opponent.getHp() <= 0) {
-            System.out.println(player.getName() + " wins!");
-            gameOver = true;
+            commandQueue.clear();
+            displayStats();
+            displayMessage(player.getName() + " wins!");
+            Global.getInstance().levelUp();
+            player.levelUp(this);
+            new RewardCommand(player, Global.getInstance().getLevel()).perform(this);
+            newOpponent();
+            displayStats();
+
         }
     }
 
@@ -90,17 +169,20 @@ public class Scene {
         commandQueue.addAll(commands);
     }
 
+    public void newOpponent() {
+        opponent = opponentFact.build(this);
+    }
+
     public static void main(String[] args) {
 
         Scene theScene = new Scene();
 
-        CharacterFactory charFact = new CharacterFactory();
+        CharacterFactory playerFact = new PlayerCharacterFactory();
+        theScene.opponentFact = new OpponentCharacterFactory();
 
-        theScene.displayMessage("Which character would you like to play as?");
-        theScene.setPlayer(charFact.build(theScene, "The Player", new PlayerBehavior()));
+        theScene.setPlayer(playerFact.build(theScene));
 
-        theScene.displayMessage("Which character would you like to play against?");
-        theScene.setOpponent(charFact.build(theScene, "The Other Guy", new ComputerBehavior()));
+        theScene.newOpponent();
 
 
         theScene.displayStats();
@@ -112,13 +194,17 @@ public class Scene {
 
             theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getPlayer()));
             theScene.commandQueue.add(new ProcessStatusEffectsCommand(theScene.getOpponent()));
-            theScene.commandQueue.add(new CheckAndDisplayStatsCommand());
+            theScene.commandQueue.add(new CheckFightOverCommand());
+            theScene.commandQueue.add(new DisplayStatsCommand());
 
             while (!theScene.commandQueue.isEmpty() && !theScene.gameOver) {
                 theScene.commandQueue.get(0).perform(theScene);
-                theScene.commandQueue.remove(0);
+                if (theScene.commandQueue.size() > 0)
+                    theScene.commandQueue.remove(0);
             }
         }
+
+        new DisplayStatsCommand().perform(theScene);
 
         theScene.displayMessage("Game over. Total damage dealt: " + Global.getInstance().getTotalDamage());
 

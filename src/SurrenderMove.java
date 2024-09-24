@@ -11,7 +11,7 @@ public class SurrenderMove extends Move{
         ArrayList<Command> commands = new ArrayList<Command>();
         commands.add(new MessageCommand(user.getName() + " surrenders " + "!"));
         commands.add(new SetHealthCommand(user, 0));
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }

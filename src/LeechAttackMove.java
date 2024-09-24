@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 
-public class HealMove extends Move{
+public class LeechAttackMove extends Move{
 
     public String getTitle(){
-        return "Heal";
+        return "Leech Attack";
     }
 
     @Override
     public ArrayList<Command> use(Character user, Character receiver) {
         ArrayList<Command> commands = new ArrayList<Command>();
-        commands.add(new MessageCommand(user.getName() + " Heals " + user.getName() + "!"));
-        commands.add(new AttackCommand(-3*user.getAttackPower(), user));
+        commands.add(new MessageCommand(user.getName() + " uses a leech attack against " + receiver.getName() + "!"));
+        commands.add(new LeechCommand(user.getAttackPower(), receiver, user));
         commands.add(new CheckFightOverCommand());
         return commands;
     }
