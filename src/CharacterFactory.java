@@ -16,7 +16,7 @@ public class CharacterFactory {
     public Character build(Scene scene, String name, Behavior behavior) {
         scene.displayMessage("1. Warrior");
         scene.displayMessage("2. Mage");
-        scene.displayMessage("3. Cleric");
+        scene.displayMessage("3. Wizzard");
         int choice = scene.getIntInput(1, 4);
         Character c;
         if (choice == 1) {
@@ -24,7 +24,7 @@ public class CharacterFactory {
         } else if (choice == 2) {
             c = new Mage(name, 2, new Staff(), new LeatherArmor());
         } else {
-            c = new Cleric(name, defaultHp, new Mace(), new BronzePlate());
+            c = new Wizzard(name, defaultHp, new Wand(), new BronzePlate());
         }
 
         c.setBehavior(behavior);
