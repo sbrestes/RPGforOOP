@@ -19,7 +19,13 @@ public class MultiAttackMove extends Move{
         commands.add(new MessageCommand(user.getName() + " uses a multi attack against " + receiver.getName() + "!"));
         commands.add(new MessageCommand("Hits " + num + " time(s)!"));
         for (int i = 0; i < num; i++) {
+            CritAttackCommand crit=new CritAttackCommand(user, receiver);
             commands.add(new AttackCommand(user.getAttackPower(), receiver));
+            if(crit.ifCrit())
+            {
+                commands.add(crit);
+                commands.add(new MessageCommand("CRIT!!!"));
+            }
         }
         commands.add(new CheckAndDisplayStatsCommand());
         commands.add(new MessageCommand(user.getName() + " takes 2 damage as recoil!"));

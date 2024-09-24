@@ -6,6 +6,8 @@ public abstract class Character {
     private int hp;
     private int maxMP;
     private int mp;
+    private double critChance;
+    private int critDmg;
 
     private Behavior behavior;
 
@@ -18,6 +20,15 @@ public abstract class Character {
         this.hp = maxHP;
         this.maxMP = 0;
         this.mp = 0;
+    }
+    public Character(String name, int maxHP, double critChance, int critDmg) {
+        this.name = name;
+        this.maxHP = maxHP;
+        this.hp = maxHP;
+        this.maxMP = 0;
+        this.mp = 0;
+        this.critChance=critChance;
+        this.critDmg=critDmg;
     }
 
     public Character(String name, int maxHP, int maxMP) {
@@ -70,6 +81,26 @@ public abstract class Character {
 
     public void setMp(int mp) {
         this.mp = mp;
+    }
+
+    public double getcritChance()
+    {
+        return critChance;
+    }
+
+    public void setcritChance(double critChance)
+    {
+        this.critChance=critChance;
+    }
+
+    public int getcritDmg()
+    {
+        return critDmg;
+    }
+
+    public void setcritDmg(int critDmg)
+    {
+        this.critDmg=critDmg;
     }
 
     public Move takeTurn(Scene scene){
