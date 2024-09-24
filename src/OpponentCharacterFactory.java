@@ -74,7 +74,7 @@ public class OpponentCharacterFactory extends CharacterFactory {
                 if (level < 10) {
                     o = new Cleric(new EarlyClericBehavior(level > 10), name + " the Cleric", (int) (Math.random() * 15) + level);
                     break;
-                } else {
+                } else  {
                     o = new Cleric(new ComputerBehavior(level > 10), name + " the Cleric", (int) (Math.random() * 15) + level);
                     break;
                 }
