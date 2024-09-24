@@ -18,8 +18,8 @@ public class Mage extends Character {
 
     public ArrayList<Move> getMoves() {
         ArrayList<Move> moves = new ArrayList<Move>();
-        moves.add(new NormalAttackMove());
         moves.add(new FireballAttackMove(50));
+        moves.add(new NormalAttackMove());
         moves.add(new MagicDust(1));
         moves.add(new FreezeMove());
         moves.add(new SurrenderMove());

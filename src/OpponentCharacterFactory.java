@@ -63,11 +63,21 @@ public class OpponentCharacterFactory extends CharacterFactory {
                 o = new Warrior(new ComputerBehavior(), name + " the Warrior", (int)(Math.random() * 10) + level);
                 break;
             case 2:
-                o = new Mage(new ComputerBehavior(level > 15), name + " the Mage", (int)(Math.random() * level + 1), 50);
-                break;
+                if (level < 7) {
+                    o = new Mage(new EarlyMageBehavior(level > 15), name + " the Mage", (int) (Math.random() * level + 1), 50);
+                    break;
+                }else {
+                    o = new Mage(new ComputerBehavior(level > 15), name + " the Mage", (int) (Math.random() * level + 1), 50);
+                    break;
+                }
             case 3:
-                o = new Cleric(new ComputerBehavior(level > 10), name + " the Cleric", (int)(Math.random() * 15) + level);
-                break;
+                if (level < 10) {
+                    o = new Cleric(new EarlyClericBehavior(level > 10), name + " the Cleric", (int) (Math.random() * 15) + level);
+                    break;
+                } else  {
+                    o = new Cleric(new ComputerBehavior(level > 10), name + " the Cleric", (int) (Math.random() * 15) + level);
+                    break;
+                }
             default:
                 o = new StrengthTrainer(new ComputerBehavior(level > 15), name + " the Strength Trainer", (int)(Math.random() * 5) + level);
                 break;
