@@ -20,13 +20,13 @@ public class FireballAttackMove extends Move {
             commands.add(new MessageCommand(user.getName() + " throws a fireball at " + receiver.getName() + "!"));
             commands.add(new MessageCommand("It's insanely effective"));
             commands.add(new AttackCommand(50, receiver));
-            commands.add(new CheckAndDisplayStatsCommand());
+            commands.add(new CheckFightOverCommand());
             return commands;
         } else {
             commands.add(new MessageCommand(user.getName() + " stubs their toe on a rock, missing their fireball!"));
             commands.add(new MessageCommand("You take 1 stubbed toe damage"));
             commands.add(new AttackCommand(1, user));
-            commands.add(new CheckAndDisplayStatsCommand());
+            commands.add(new CheckFightOverCommand());
             return commands;
         }
 

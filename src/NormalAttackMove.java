@@ -11,7 +11,7 @@ public class NormalAttackMove extends Move{
         ArrayList<Command> commands = new ArrayList<Command>();
         commands.add(new MessageCommand(user.getName() + " uses a normal attack against " + receiver.getName() + "!"));
         commands.add(new AttackCommand(user.getAttackPower(), receiver));
-        commands.add(new CheckAndDisplayStatsCommand());
+        commands.add(new CheckFightOverCommand());
         return commands;
     }
 }

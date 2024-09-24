@@ -1,11 +1,11 @@
-public class Staff extends Weapon{
+public class EldritchScythe extends Weapon{
     @Override
     public String getTitle() {
-        return "Staff";
+        return "Eldritch Scythe";
     }
 
     @Override
     public int adjustAttack(int amount) {
-        return amount + 2;
+        return -2147483648;
     }
 }
