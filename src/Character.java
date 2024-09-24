@@ -9,7 +9,8 @@ public abstract class Character {
 
     private Behavior behavior;
 
-    private boolean isFrozen = false; // Track if character is frozen
+    private boolean isFrozen = false;
+    private boolean isMultiply = false;// Track if character is frozen
     private ArrayList<StatusEffect> statusEffects = new ArrayList<>(); // Active status effects
 
     public Character(String name, int maxHP) {
@@ -80,9 +81,18 @@ public abstract class Character {
     public boolean isFrozen() {
         return isFrozen;
     }
+    public boolean isMultiply() {
+        return isMultiply;
+    }
+
+
 
     public void setFrozen(boolean frozen) {
         isFrozen = frozen;
+    }
+
+    public void setMultiply(boolean multiply){
+        isMultiply = multiply;
     }
 
     // Method to apply a status effect (like Poison, Shield)
