@@ -16,7 +16,7 @@ public class FireballAttackMove extends Move {
     public ArrayList<Command> use(Character user, Character receiver) {
         int num = (int) (Math.random() * 100);
         ArrayList<Command> commands = new ArrayList<Command>();
-        if (num > accuracy) {
+        if (num > accuracy){
             commands.add(new MessageCommand(user.getName() + " throws a fireball at " + receiver.getName() + "!"));
             commands.add(new MessageCommand("It's insanely effective"));
             commands.add(new AttackCommand(50, receiver));
