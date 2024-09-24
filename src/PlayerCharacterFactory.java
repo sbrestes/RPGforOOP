@@ -16,7 +16,7 @@ public class PlayerCharacterFactory extends CharacterFactory {
         scene.displayMessage("What is your name?");
         String name = scene.getStringInput();
         scene.displayMessage("Which character would you like to play as?");
-        scene.displayOptions(new String[] {"Warrior", "Mage", "Cleric", "Strength Trainer", "Final Boss"});
+        scene.displayOptions(new String[] {"Warrior", "Mage", "Cleric", "Strength Trainer", "Wizzard", "Final Boss"});
         int choice = scene.getIntInput(1, 6);
         Character c;
         if (choice == 1) {
@@ -26,7 +26,9 @@ public class PlayerCharacterFactory extends CharacterFactory {
         } else if (choice == 3){
             c = new Cleric(new PlayerBehavior(), name + " the Cleric", defaultHp);
         } else if (choice == 4){
-            c = new StrengthTrainer(new PlayerBehavior(), name + " the Strength Trainer", defaultHp);
+            c = new Cleric(new PlayerBehavior(), name + " the Cleric", defaultHp);
+        } else if (choice == 5){
+            c = new Wizzard(new PlayerBehavior(), name + " the Wizzard", defaultHp);
         } else {
             c = new FinalBoss(new PlayerBehavior(), name + " the Final Boss", defaultHp);
         }
