@@ -8,7 +8,7 @@ public class ProcessStatusEffectsCommand extends Command {
 
     public void perform(Scene scene) {
         target.processStatusEffects(scene);
-        for (int i = 0; i<= target.statuses.size(); i++) {
+        for (int i = 0; i< target.statuses.size(); i++) {
             target.statuses.get(i).ExecuteEffect();
 
         }

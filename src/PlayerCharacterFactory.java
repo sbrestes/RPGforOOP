@@ -26,7 +26,7 @@ public class PlayerCharacterFactory extends CharacterFactory {
         } else if (choice == 3){
             c = new Cleric(new PlayerBehavior(), name + " the Cleric", defaultHp);
         } else if (choice == 4){
-            c = new StrengthTrainer(new PlayerBehavior(), name + " the Cleric", defaultHp);
+            c = new StrengthTrainer(new PlayerBehavior(), name + " the Strength Trainer", defaultHp);
         } else if (choice == 5){
             c = new Wizzard(new PlayerBehavior(), name + " the Wizzard", defaultHp);
         } else {
