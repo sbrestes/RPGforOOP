@@ -23,14 +23,14 @@ public class CritAttackCommand extends Command
     }
     public int dmgDealt()
     {
-        if(ifCrit) return attacker.getcritDamg();
+        if(ifCrit) return attacker.getcritDmg();
         return 0;
     }
     public void perform(Scene scene)
     {
         if(ifCrit)
         {
-            int actualDealtDamage = defender.dealDamage(attacker.getcritDamg());
+            int actualDealtDamage = defender.dealDamage(attacker.getcritDmg());
             scene.displayMessage(actualDealtDamage + " CRITICAL DAMAGE to " + defender.getName());
             Global.getInstance().reportDamage(actualDealtDamage);
         }

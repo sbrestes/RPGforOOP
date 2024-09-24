@@ -7,8 +7,8 @@ public abstract class Character {
     private int maxMP;
     private int mp;
 
-    private double critChance;
-    private int critDmg;
+    private double critChance = 0.1;
+    private int critDmg = 5;
 
     private Weapon weapon;
     private Equipment armor;
