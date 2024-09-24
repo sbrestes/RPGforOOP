@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public abstract class Character {
     private String name;
+
+    public ArrayList<Status> statuses = new ArrayList<>();
+
     private int maxHP;
     private int hp;
     private int maxMP;
